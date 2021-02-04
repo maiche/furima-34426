@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type    | Options                   |
-| --------------- | ------- | ------------------------- |
-| nickname        | string  | null: false               |
-| email           | string  | null: false, unique: true |
-| password        | string  | null: false               |
-| last_name       | string  | null: false               |
-| first_name      | string  | null: false               |
-| last_name_kana  | string  | null: false               |
-| first_name_kana | string  | null: false               |
-| birth_year      | integer | null: false               |
-| birth_month     | integer | null: false               |
-| birth_day       | integer | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name_kana     | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| date_of_birth      | date    | null: false               |
 
 ### Association
 
@@ -22,23 +20,22 @@
 
 ## items テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| title         | string     | null: false                    |
-| description   | text       | null: false                    |
-| category      | integer    | null: false                    |
-| condition     | integer    | null: false                    |
-| shipping_fee  | integer    | null: false                    |
-| shipping_from | integer    | null: false                    |
-| shipping_date | integer    | null: false                    |
-| price         | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| title            | string     | null: false                    |
+| description      | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| condition_id     | integer    | null: false                    |
+| shipping_fee_id  | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| shipping_date_id | integer    | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one :purchase_record
-- has_one :address
 
 ## purchase_records テーブル
 
@@ -51,19 +48,20 @@
 
 - belongs_to :item
 - belongs_to :user
+- has_one :address
 
 ## addresses テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| postal_code  | string     | null: false                    |
-| prefecture   | integer    | null: false                    |
-| district     | string     | null: false                    |
-| address_code | string     | null: false                    |
-| building     | string     |                                |
-| telephone    | string     | null: false                    |
-| item         | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| postal_code     | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| district        | string     | null: false                    |
+| address_code    | string     | null: false                    |
+| building        | string     |                                |
+| telephone       | string     | null: false                    |
+| purchase_record | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :item
+- belongs_to :purchase_record
