@@ -9,7 +9,7 @@ class User < ApplicationRecord
   NAME_KANA_REGEX = /[\p{katakana}ー－&&[^ -~｡-ﾟ]]+/.freeze
 
   validates :password, format: { with: PASSWORD_REGEX, message: 'must include both letters and numbers' }
-  
+
   with_options presence: true do
     validates :nickname, :date_of_birth
     with_options format: { with: NAME_REGEX, message: 'must be full-width characters' } do

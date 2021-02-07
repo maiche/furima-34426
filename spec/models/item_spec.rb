@@ -68,17 +68,17 @@ RSpec.describe Item, type: :model do
       it '販売価格が¥300未満では出品できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it '販売価格が¥9,999,999を超えると出品できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it '販売価格が全角では出品できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
     end
   end
