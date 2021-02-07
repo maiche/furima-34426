@@ -1,18 +1,12 @@
 class Item < ApplicationRecord
   with_options presence: true do
     validates :image
-    with_options length: { maximum: 40 } do
-      validates :title
-    end
-    with_options length: { maximum: 1000 } do
-      validates :description
-    end
-    with_options numericality: { other_than: 1 } do
+    validates :title, length: { maximum: 40 }
+    validates :description, length: { maximum: 1000 }
+    with_options numericality: { other_than: 1, message: "can't be blank" } do
       validates :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :shipping_date_id
     end
-    with_options numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999} do
-      validates :price
-    end
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "must be a half-width number between 300 and 9,999,999" }
   end
 
   belongs_to :user
