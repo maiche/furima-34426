@@ -80,6 +80,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
+      it '販売価格が半角英語では出品できない' do
+        @item.price = 'abc'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
+      end
     end
   end
 end
