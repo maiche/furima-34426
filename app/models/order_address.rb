@@ -3,10 +3,9 @@ class OrderAddress
   attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :district, :address_code, :building, :telephone, :token
 
   with_options presence: true do
-    validates :item_id, :user_id, :token
+    validates :item_id, :user_id, :token, :district, :address_code
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :district, :address_code
     validates :telephone, format: { with: /\A[0-9]{1,11}\z/, message: 'is invalid. Input only number' }
   end
 
